@@ -1,0 +1,28 @@
+{% extends "layout.html"%}
+
+{% block content %}
+
+{{data['title']}}
+<br>
+{{data['amount']}}
+<br>
+{{data['remaining']}}
+<br><br>
+
+<button onclick="toggle_display()">make Transaction</button>
+<a href="/{{data['id']}}/delete"><button>delete</button></a>
+<br>
+<br>
+<div class="content_section">
+    <form action="/{{data['id']}}", method="POST">
+        <label for="how much"> how much
+            <input type="text" name="how much" id="">
+        </label>
+        <label for="for what">for what
+            <input type="text" name="for what" id="">
+        </label>
+        <input type="submit" name="make transaction" id="">
+    </form>
+</div>
+
+{% endblock content %}

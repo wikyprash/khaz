@@ -1,0 +1,22 @@
+{% extends "layout.html"%}
+
+{% block content %}
+<form action="/" method="POST">
+    <label for="title"> Title
+        <input type="title" name="title" id="title">
+    </label>
+    <label for="amount"> Amount
+        <input type="amount" name="amount" id="amount">
+    </label>
+    <input type="submit" name="submit" id="submit" value="create">
+</form>
+<br>
+
+{{mpty}}
+{%for i in data%}
+<div>
+    <a href="{{url_for('khaz', id = i.id)}}"><h1>{{i.title}}  |  {{i.amount}}  |  {{i.remaining}}</h1></a>
+</div>
+{%endfor%}
+
+{% endblock content %}
