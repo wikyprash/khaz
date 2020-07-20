@@ -1,0 +1,3 @@
+create table xp (id int not null auto_increment primary key, title varchar(10) not null, amount int not null, remaining int not null);
+
+create table trans (trans_id int not null primary key, trans_amnt int not null, trans_for varchar(20) not null, foreign key(trans_id) references xp(id) on delete cascade);

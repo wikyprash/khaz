@@ -1,10 +1,13 @@
 from flask import Flask, render_template, request, redirect
 from pymysql import connect, cursors
 
-connection = connect(host='localhost',
-                     user='root',
-                     password='Prash',
-                     db='khaz',
+host = 'sql12.freemysqlhosting.net'
+name = 'sql12355474'
+pin = 'WPcBGUjujc'
+connection = connect(host=host,
+                     user=name,
+                     password=pin,
+                     db=name,
                      charset='utf8mb4',
                      cursorclass=cursors.DictCursor)
 
