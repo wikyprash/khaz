@@ -39,11 +39,16 @@ def index():
 def khaz(id):
     if request.method == 'POST':
         spent = request.form['how much']
+        used_for = request.form['for what']
+
         q = f"select remaining from xp where id = {id}"     # get the remaining amount
         cursor.execute(q)
         remaining = cursor.fetchone()['remaining']
         finalRemaining = int(remaining) - int(spent)
         q = f"update xp set remaining={finalRemaining} where id = {id}"     # updating the remaining amount
+        cursor.execute(q)
+
+        q = f"INSERT INTO trans (trans_id, trans_amnt, trans_for) values ('{id}', '{spent}', '{used_for}')"
         cursor.execute(q)
         connection.commit()
         return redirect(f'{id}')
@@ -52,14 +57,20 @@ def khaz(id):
         try:
             sql = f"select * from xp where id = {id}"   # get the specific record 
             cursor.execute(sql)
-            connection.commit()
             a = [i for i in cursor]
-            return render_template('khaz.html', data=a[0])
+
+            q_showTrans = f"SELECT * FROM trans WHERE trans_id = {id}"      #get all transactions
+            cursor.execute(q_showTrans)
+            transactions = [trans for trans in cursor]
+
+            connection.commit()
+            data = {'a' : a[0], 'transactions' : transactions}
+            return render_template('khaz.html', data= data)
         except Exception as e:
             return "error > {}".format(e)
 
 
-@app.route('/<id>/delete')
+@app.route('/delete/<id>')
 def delete(id):
     q = f"DELETE FROM xp WHERE id={id}"     # delete the specific record
     cursor.execute(q)

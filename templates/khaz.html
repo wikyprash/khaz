@@ -2,15 +2,15 @@
 
 {% block content %}
 
-{{data['title']}}
+{{data['a']['title']}}
 <br>
-{{data['amount']}}
+{{data['a']['amount']}}
 <br>
-{{data['remaining']}}
+{{data['a']['remaining']}}
 <br><br>
 
 <button onclick="toggle_display()">make Transaction</button>
-<a href="/{{data['id']}}/delete"><button>delete</button></a>
+<a href="/delete/{{url_for('index', id = data['a']['id'])}}"><button>delete</button></a>
 <br>
 <br>
 <div class="content_section">
@@ -25,4 +25,11 @@
     </form>
 </div>
 
+
+<div>
+    {% for i in data['transactions'] %}
+    {{i['trans_amnt']}} - {{i['trans_for']}}
+        <br>
+    {% endfor %}
+</div>
 {% endblock content %}
