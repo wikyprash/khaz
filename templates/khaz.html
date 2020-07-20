@@ -10,11 +10,11 @@
 <br><br>
 
 <button onclick="toggle_display()">make Transaction</button>
-<a href="/delete/{{url_for('index', id = data['a']['id'])}}"><button>delete</button></a>
+<a href="{{url_for('delete', id = data['a']['id'])}}"><button>delete</button></a>
 <br>
 <br>
 <div class="content_section">
-    <form action="/{{data['id']}}", method="POST">
+    <form action="", method="POST">
         <label for="how much"> how much
             <input type="text" name="how much" id="">
         </label>
